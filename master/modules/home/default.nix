@@ -24,7 +24,7 @@ in
   imports = [
     ./terminals/tmux.nix
     ./terminals/ghostty.nix
-    ./editors/nixvim.nix
+    # ./editors/nixvim.nix
     ./cli/bat.nix
     ./cli/btop.nix
     # ./cli/bottom.nix
@@ -35,6 +35,7 @@ in
     ./cli/tealdeer.nix
     # ./yazi
     ./overview.nix
+    ./dev-tools.nix # Development tools (PHP, Node.js, Python)
   ];
 
     # Iterate over xdg configs and map them accordingly

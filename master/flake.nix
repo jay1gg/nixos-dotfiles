@@ -12,8 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nixvim for Neovim configuration
-    nixvim.url = "github:nix-community/nixvim/nixos-25.11";
+    # # Nixvim for Neovim configuration
+    # nixvim.url = "github:nix-community/nixvim/nixos-25.11";
 
     # Code formatter
     alejandra.url = "github:kamadorueda/alejandra";
@@ -81,6 +81,12 @@
           ./modules/theme.nix # Set dark theme
           ./modules/ly.nix # Ly display manager with matrix animation
           ./modules/nh.nix # Nix helper
+
+          # Development languages
+          ./modules/php.nix # PHP with Laravel support
+          ./modules/nodejs.nix # Node.js with npm/yarn/pnpm
+          ./modules/python.nix # Python 3 development
+
           nix-flatpak.nixosModules.nix-flatpak
           # External modules
           inputs.catppuccin.nixosModules.catppuccin

@@ -16,7 +16,7 @@
       log.date = "iso"; # ISO 8601 date format
       # Conflict resolution style for readable diffs
       merge.conflictStyle = "diff3";
-      core.editor = "nvim";
+      core.editor = "nano";
       diff.colorMoved = "default";
       merge.stat = "true";
       core.whitespace = "fix,-indent-with-non-tab,trailing-space,cr-at-eol";

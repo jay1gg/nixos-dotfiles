@@ -21,8 +21,6 @@
   # Aliases to make `ls`, `ll`, `la` use eza
   home.shellAliases = {
     ":q" = "exit";
-    sv = "sudo nvim";
-    v = "nvim";
     c = "clear";
     ls = "eza";
     lt = "eza --tree --level=2";
@@ -33,7 +31,6 @@
     d = "exa -a --grid ";
     dir = "exa -a --grid";
     jctl = "journalctl -p 3 -xb";
-    notes = "nvim ~/notes.txt";
     ncg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
     man = "batman";
     dysk = "dysk -c label+default";

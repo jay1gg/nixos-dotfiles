@@ -287,10 +287,6 @@
           run = "archive";
         }
         {
-          name = "*.{AppImage,appimage}";
-          run = "archive";
-        }
-        {
           mime = "application/{iso9660-image,qemu-disk,ms-wim,apple-diskimage}";
           run = "archive";
         }

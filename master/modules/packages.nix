@@ -51,11 +51,11 @@
     # Network
     nm-applet.indicator = true;
 
-    # Editors
-    neovim = {
-      enable = false;
-      defaultEditor = false;
-    };
+    # # Editors
+    # neovim = {
+    #   enable = false;
+    #   defaultEditor = false;
+    # };
 
     # File managers
     thunar.enable = true;
@@ -86,15 +86,12 @@
       cmake
       gcc
       gnumake
-      luarocks
       nh
-      onefetch
       vscode
     ];
 
     # Desktop environment packages
     desktopPackages = with pkgs; [
-      appimage-run
       brightnessctl
       cliphist
       grim
@@ -129,13 +126,6 @@
 
     # Utilities
     utilsPackages = with pkgs; [
-      bc
-      ctop
-      dua
-      duf
-      eza
-      erdtree
-      fd
       ffmpeg
       figlet
       file-roller
@@ -173,7 +163,6 @@
       v4l-utils
       wget
       xarchiver
-      # yt-dlp
       zoxide
       (btop.override {
         cudaSupport = true;
@@ -184,21 +173,12 @@
 
     # Hardware monitoring
     hardwarePackages = with pkgs; [
-      # atop
-      # bandwhich
-      # caligula
-      # cpufetch
-      cyme
-      gdu
       glances
-      # gping
       hyfetch
       ipfetch
       light
       lm_sensors
       mission-center
-      # neofetch
-      # pfetch
       smartmontools
     ];
 
@@ -243,28 +223,13 @@
 
     # Special packages
     specialPackages = with pkgs; [
-      # Wrapped Zoom Fix for Wayland
-    #   (pkgs.symlinkJoin {
-    #     name = "zoom-us";
-    #     paths = [ pkgs-oldstable.zoom-us ];
-    #     buildInputs = [ pkgs.makeWrapper ];
-    #     postBuild = ''
-    #       wrapProgram $out/bin/zoom-us \
-    #         --set QT_QPA_PLATFORM wayland \
-    #         --set XDG_CURRENT_DESKTOP Hyprland \
-    #         --set XDG_SESSION_TYPE wayland \
-    #         --set ELECTRON_OZONE_PLATFORM_HINT wayland \
-    #         --set WAYLAND_DISPLAY $WAYLAND_DISPLAY
-    #     '';
-    #   })
+      bc
       baobab
       btrfs-progs
       cava
       cmatrix
       cpufrequtils
       curl
-      # distrobox
-      # dysk
       eog
       fastfetch
       feh
