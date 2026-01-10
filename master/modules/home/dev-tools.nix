@@ -1,23 +1,24 @@
+# Development tools configuration
+# Code quality, formatting, and testing tools
 {pkgs, ...}: {
-  # Development tools configuration
   home.packages = with pkgs; [
-    # Node.js development tools
-    nodePackages.prettier # Code formatter
-    nodePackages.eslint # JavaScript linter
-    nodePackages.typescript # TypeScript support
+    # JavaScript/TypeScript development tools
+    nodePackages.prettier          # Code formatter for JS/TS/JSON/CSS
+    nodePackages.eslint            # Linter to find and fix JS problems
+    nodePackages.typescript        # TypeScript compiler and language support
 
     # Python development tools
-    python3Packages.black # Python formatter
-    python3Packages.pylint # Python linter
-    python3Packages.mypy # Python static type checker
-    python3Packages.pytest # Python testing framework
+    python3Packages.black          # Code formatter for Python (PEP 8 compliant)
+    python3Packages.pylint         # Static analysis tool for Python code
+    python3Packages.mypy           # Static type checker for Python
+    python3Packages.pytest         # Testing framework for Python
 
-    # General development
-    git-lfs # Git Large File Storage
+    # General development utilities
+    git-lfs                        # Git Large File Storage for binary files
   ];
 
-  # Home directory variables for development
+  # Environment variables for development
   home.sessionVariables = {
-    EDITOR = "nano"; # Set preferred editor
+    EDITOR = "nano";               # Default text editor (set to vi for minimal systems)
   };
 }

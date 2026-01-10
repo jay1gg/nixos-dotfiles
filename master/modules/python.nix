@@ -1,16 +1,16 @@
-{pkgs, ...}: {
-  # Python 3 with development tools
+# Python Development Environment
+# Provides Python 3 with package management and development tools
+{config,pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    python3 # Python 3
-    python3Packages.pip # Package installer
-    python3Packages.virtualenv # Virtual environments
-    python3Packages.ipython # Enhanced Python shell
-    ruff # Fast Python linter and formatter
+    python3                      # Python 3 - Latest version
+    python3Packages.pip          # PIP - Python package installer
+    python3Packages.virtualenv   # Virtualenv - Create isolated Python environments
+    python3Packages.ipython      # IPython - Enhanced interactive Python shell
+    ruff                         # Ruff - Fast Python linter and formatter (Rust-based)
   ];
 
-  # Python environment
+  # Python environment configuration
   environment.variables = {
-    PYTHON = "${pkgs.python3}/bin/python3";
-    PYTHONPATH = "\${HOME}/.local/lib/python3.12/site-packages";
+    PYTHON = "${pkgs.python3}/bin/python3";          # Default Python executable
   };
 }

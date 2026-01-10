@@ -4,29 +4,34 @@
   config,
   ...
 }: {
-  # Install themes/cursors that we reference
+  # System Theme Configuration
+  # Sets GTK/Qt themes, cursor, icons, and dark mode preferences
+  
+  # Install theme packages
   environment.systemPackages = with pkgs; [
-    adwaita-icon-theme
-    papirus-icon-theme
-    bibata-cursors
-    adwaita-qt
+    adwaita-icon-theme      # GNOME Adwaita icon theme
+    papirus-icon-theme      # Papirus - Modern icon theme
+    bibata-cursors          # Bibata - Modern cursor theme
+    adwaita-qt              # Qt integration with GTK theme
   ];
 
-  # Environment variables as a fallback for apps not honoring gsettings
-  # Avoid hard overrides so tools like nwg-look can preview/apply themes dynamically.
+  # Fallback environment variables for apps that don't read dconf
+  # Avoid hard overrides so tools like nwg-look can dynamically change themes
   environment.variables = {
-    GTK2_RC_FILES = "${pkgs.gnome-themes-extra}/share/themes/Adwaita-dark/gtk-2.0/gtkrc"; # GTK2 fallback only
-    QT_QPA_PLATFORMTHEME = "gtk3"; # Qt apps follow GTK portal/theme
+    # GTK2 theming (for legacy GTK2 applications)
+    GTK2_RC_FILES = "${pkgs.gnome-themes-extra}/share/themes/Adwaita-dark/gtk-2.0/gtkrc";
+    # Qt5/Qt6 apps follow GTK theme via XDG portal
+    QT_QPA_PLATFORMTHEME = "gtk3";
   };
 
-  # Cursor defaults for XDG/Wayland sessions
+  # Cursor theme for XDG/Wayland sessions
   environment.sessionVariables = {
-    XCURSOR_THEME = "Bibata-Modern-Classic";
-    XCURSOR_SIZE = "24";
+    XCURSOR_THEME = "Bibata-Modern-Classic";  # Cursor theme name
+    XCURSOR_SIZE = "24";                      # Cursor size in pixels
   };
 
-  # Set system dconf defaults so new users prefer dark by default.
-  # Users can still override per-user via gsettings.
+  # System-wide dconf defaults (theme, dark mode preference)
+  # New users get these defaults; they can override with gsettings
   environment.etc = {
     "dconf/profile/user".text = ''
       user-db:user

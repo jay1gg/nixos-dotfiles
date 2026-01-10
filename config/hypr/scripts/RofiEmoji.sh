@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/jay1gg 💫 ---- */  ##
+# /* ----  https://github.com/jay1gg  ---- */  ##
 
 # Variables
 rofi_theme="$HOME/.config/rofi/config-emoji.rasi"
@@ -158,7 +158,7 @@ exit
 💯 hundred points score perfect numbers century exam quiz test pass hundred
 💢 anger symbol angry mad
 💥 collision bomb explode explosion collision blown
-💫 dizzy star sparkle shoot magic
+ dizzy star sparkle shoot magic
 💦 sweat droplets water drip oops
 💨 dashing away wind air fast shoo fart smoke puff
 🕳️ hole embarrassing
@@ -1827,7 +1827,7 @@ ycap  symbol blue-square twitter
 🏳️‍⚧️ transgender flag lgbtq
 😶‍🌫️ face in clouds shower steam dream
 😮‍💨 face exhaling relieve relief tired sigh
-😵‍💫 face with spiral eyes sick ill confused nauseous nausea
+😵‍ face with spiral eyes sick ill confused nauseous nausea
 ❤️‍🔥 heart on fire passionate enthusiastic
 ❤️‍🩹 mending heart broken heart bandage wounded
 🧔‍♂️ man beard facial hair

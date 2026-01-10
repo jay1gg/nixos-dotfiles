@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/jay1gg 💫 ---- */  ##
+# /* ----  https://github.com/jay1gg  ---- */  ##
 # RofiBeats - unified, dynamic UI (add, remove, manage, play)
 
 mDIR="$HOME/Music/"

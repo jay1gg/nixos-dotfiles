@@ -1,33 +1,35 @@
-# Eza is a ls replacement
+# Eza - Modern `ls` Replacement
+# Fast, colorful file/directory listing with git integration
 {
   programs.eza = {
     enable = true;
-    icons = "auto";
+    icons = "auto";              # Show icons when terminal supports it
     enableBashIntegration = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
-    git = true;
+    git = true;                  # Show git status for files
 
     extraOptions = [
-      "--group-directories-first"
-      "--no-quotes"
-      "--header" # Show header row
-      "--git-ignore"
-      # "--time-style=long-iso" # ISO 8601 extended format for time
-      "--classify" # append indicator (/, *, =, @, |)
-      "--hyperlink" # make paths clickable in some terminals
+      "--group-directories-first"  # Folders before files
+      "--no-quotes"                # Don't quote filenames
+      "--header"                   # Show header row with column names
+      "--git-ignore"               # Respect .gitignore
+      # "--time-style=long-iso"    # ISO 8601 extended format (YYYY-MM-DD)
+      "--classify"                 # Append type indicator (/, *, =, @, |)
+      "--hyperlink"                # Make paths clickable in some terminals
     ];
   };
-  # Aliases to make `ls`, `ll`, `la` use eza
+  
+  # Shell aliases to replace ls with eza
   home.shellAliases = {
-    ":q" = "exit";
-    c = "clear";
-    ls = "eza";
-    lt = "eza --tree --level=2";
-    ll = "eza  -a --no-user --long";
-    la = "eza -lah ";
-    lsbc = "lsblk -f | bat -l conf -p ";
-    tree = "eza --tree ";
+    ":q" = "exit";               # Vim-style exit
+    c = "clear";                 # Clear screen
+    ls = "eza";                  # Replace ls with eza
+    lt = "eza --tree --level=2"; # Tree view (2 levels deep)
+    ll = "eza  -a --no-user --long";  # Long format listing
+    la = "eza -lah";             # Long format with hidden files
+    lsbc = "lsblk -f | bat -l conf -p";  # Disk layout with colors
+    tree = "eza --tree";         # Tree view (all levels)
     d = "exa -a --grid ";
     dir = "exa -a --grid";
     jctl = "journalctl -p 3 -xb";

@@ -1,4 +1,4 @@
-# 💫 https://github.com/jay1gg 💫 #
+#  https://github.com/jay1gg  #
 # Variables
 {
   # Git Configuration ( For Pulling Software Repos )

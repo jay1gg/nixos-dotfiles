@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/jay1gg 💫 ---- */  #
+# /* ----  https://github.com/jay1gg  ---- */  #
 # Overview toggle wrapper - tries Quickshell first, falls back to AGS
 
 set -euo pipefail

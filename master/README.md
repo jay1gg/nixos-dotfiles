@@ -1,4 +1,4 @@
-# NixOS Dotfiles 💫
+# NixOS Dotfiles 
 
 A complete NixOS configuration using Nix Flakes with Home Manager, featuring a Hyprland desktop environment setup.
 

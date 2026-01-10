@@ -1,4 +1,4 @@
-# 💫 https://github.com/jay1gg 💫 #
+#  https://github.com/jay1gg  #
 # Users - NOTE: Packages defined on this will be on current user only
 {
   pkgs,

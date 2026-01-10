@@ -1,4 +1,4 @@
-# 💫 https://github.com/jay1gg 💫 #
+#  https://github.com/jay1gg  #
 # Main default config
 {
   config,
@@ -104,7 +104,8 @@ in {
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Services to start
+  # System services configuration
+  # Services are long-running background processes
   services = {
     xserver = {
       enable = false;

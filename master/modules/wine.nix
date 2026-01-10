@@ -1,22 +1,22 @@
+# Wine - Windows Compatibility Layer
+# Allows running Windows applications on Linux
 {pkgs, config, username, ...}: {
-  # Wine support for running Windows applications
-  
   environment.systemPackages = with pkgs; [
-    # Wine
-    wine # Wine (main package)
-    wine64 # Wine 64-bit support
-    winetricks # Wine tricks for installing components
+    # Core Wine packages
+    wineWowPackages.stable            # Wine 64-bit support for modern Windows apps
+    winetricks        # Script to install Windows components (fonts, libraries)
     
-    # Wine dependencies and utilities
-    dxvk # DirectX 12 implementation for Wine
-    vkd3d # Direct3D 12 support
+    # Graphics libraries for Direct3D support
+    dxvk              # DirectX 12-11 implementation using Vulkan
+    vkd3d             # Direct3D 12 support using Vulkan
     
-    # GUI utilities
-    protontricks # Proton tricks for compatibility
+    # Proton/Steam compatibility
+    protontricks      # Install Windows libraries in Proton prefixes (for Steam)
   ];
   
   # Wine environment configuration
+  # Sets default Wine prefix location
   environment.variables = {
-    WINE_DIR = "/home/${username}/.wine";
+    WINE_DIR = "/home/${username}/.wine";  # Default Wine prefix directory
   };
 }

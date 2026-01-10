@@ -1,12 +1,13 @@
+# PHP Development Environment
+# Provides PHP 8.4 with Laravel development support
 {pkgs, ...}: {
-  # PHP with Laravel support
   environment.systemPackages = with pkgs; [
-    php84 # PHP 8.4
-    php84Packages.composer # Composer for PHP dependencies
+    php84              # PHP 8.4 - Latest version with security updates
+    php84Packages.composer  # Composer - PHP dependency manager (like npm/pip)
   ];
 
-  # PHP CLI tools and extensions
+  # PHP environment configuration
   environment.variables = {
-    PHP_VERSION = "84";
+    PHP_VERSION = "84";  # Default PHP version reference
   };
 }

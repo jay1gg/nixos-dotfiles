@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/jay1gg 💫 ---- */
+# /* ----  https://github.com/jay1gg  ---- */
 # This script for selecting wallpapers (SUPER W)
 
 # WALLPAPERS PATH
