@@ -1,0 +1,298 @@
+{ pkgs
+, pkgs-oldstable
+, inputs
+, host
+, ...
+}: {
+
+  # Services
+  services.power-profiles-daemon.enable = true;
+
+  # Programs
+  programs = {
+    # Window manager and desktop environment
+    hyprland = {
+      enable = true;
+      withUWSM = false;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland; # xdph none git
+      xwayland.enable = true;
+    };
+
+    # Shell
+    zsh.enable = true;
+
+    # Browsers
+    firefox.enable = false;
+
+    # Status bars (waybar started by Hyprland dotfiles)
+    waybar.enable = false; # Enabling causes two waybars
+
+    # Screen lockers
+    hyprlock.enable = true;
+
+    # Desktop utilities
+    dconf.enable = true;
+    seahorse.enable = true;
+    fuse.userAllowOther = true;
+    mtr.enable = true;
+
+    # Security
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+
+    # Version control
+    git.enable = true;
+
+    # Terminal multiplexers
+    tmux.enable = true;
+
+    # Network
+    nm-applet.indicator = true;
+
+    # Editors
+    neovim = {
+      enable = false;
+      defaultEditor = false;
+    };
+
+    # File managers
+    thunar.enable = true;
+    thunar.plugins = with pkgs.xfce; [
+      exo
+      mousepad
+      thunar-archive-plugin
+      thunar-volman
+      tumbler
+    ];
+  };
+
+  # Nixpkgs configuration
+  nixpkgs.config.allowUnfree = true;
+
+  # System packages
+  environment.systemPackages = let
+    # Communication
+    communicationPackages = with pkgs; [
+      telegram-desktop
+    ];
+
+    # Development tools
+    developmentPackages = with pkgs; [
+      alejandra
+      cargo
+      clang
+      cmake
+      gcc
+      gnumake
+      luarocks
+      nh
+      onefetch
+      vscode
+    ];
+
+    # Desktop environment packages
+    desktopPackages = with pkgs; [
+      appimage-run
+      brightnessctl
+      cliphist
+      grim
+      grimblast
+      hyprcursor
+      hypridle
+      hyprlang
+      hyprpolkitagent
+      hyprshot
+      hyprland-qt-support
+      loupe
+      mesa
+      nwg-displays
+      nwg-look
+      pyprland
+      rofi
+      slurp
+      swww
+      swappy
+      swaynotificationcenter
+      wallust
+      waypaper
+      waybar
+      wdisplays
+      wl-clipboard
+      wlogout
+      wlr-randr
+      yad
+      (inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default)
+      (inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.default)
+    ];
+
+    # Utilities
+    utilsPackages = with pkgs; [
+      bc
+      ctop
+      dua
+      duf
+      eza
+      erdtree
+      fd
+      ffmpeg
+      figlet
+      file-roller
+      findutils
+      frogmouth
+      glib
+      gsettings-qt
+      jq
+      killall
+      libnotify
+      lolcat
+      lsd
+      lstr
+      macchina
+      mcat
+      mdcat
+      ncdu
+      ncftp
+      netop
+      oh-my-posh
+      openssl
+      pamixer
+      pavucontrol
+      pik
+      playerctl
+      ripgrep
+      socat
+      starship
+      tldr
+      trippy
+      tuptime
+      ugrep
+      unrar
+      unzip
+      v4l-utils
+      wget
+      xarchiver
+      # yt-dlp
+      zoxide
+      (btop.override {
+        cudaSupport = true;
+        rocmSupport = true;
+      })
+      obs-studio
+    ];
+
+    # Hardware monitoring
+    hardwarePackages = with pkgs; [
+      # atop
+      # bandwhich
+      # caligula
+      # cpufetch
+      cyme
+      gdu
+      glances
+      # gping
+      hyfetch
+      ipfetch
+      light
+      lm_sensors
+      mission-center
+      # neofetch
+      # pfetch
+      smartmontools
+    ];
+
+    # Internet and browsers
+    internetPackages = with pkgs; [
+      google-chrome
+    ];
+
+    # Virtualization
+    virtualizationPackages = with pkgs; [
+      libvirt
+      virt-manager
+      virt-viewer
+    ];
+
+    # Video and media
+    videoPackages = with pkgs; [
+      vlc
+      (mpv.override { scripts = [ mpvScripts.mpris ]; })
+    ];
+
+    # Terminals
+    terminalsPackages = with pkgs; [
+      kitty
+      wezterm
+    ];
+
+    # Custom scripts
+    scripts = [
+      (pkgs.writeShellScriptBin "update" ''
+        cd ~/nixos-dotfiles/master
+        nh os switch -u -H ${host} .
+      '')
+      (pkgs.writeShellScriptBin "rebuild" ''
+        cd ~/nixos-dotfiles/master
+        sudo nixos-rebuild switch --flake ~/nixos-dotfiles/master
+      '')
+      (pkgs.writeShellScriptBin "ncg" ''
+        nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot
+      '')
+    ];
+
+    # Special packages
+    specialPackages = with pkgs; [
+      # Wrapped Zoom Fix for Wayland
+    #   (pkgs.symlinkJoin {
+    #     name = "zoom-us";
+    #     paths = [ pkgs-oldstable.zoom-us ];
+    #     buildInputs = [ pkgs.makeWrapper ];
+    #     postBuild = ''
+    #       wrapProgram $out/bin/zoom-us \
+    #         --set QT_QPA_PLATFORM wayland \
+    #         --set XDG_CURRENT_DESKTOP Hyprland \
+    #         --set XDG_SESSION_TYPE wayland \
+    #         --set ELECTRON_OZONE_PLATFORM_HINT wayland \
+    #         --set WAYLAND_DISPLAY $WAYLAND_DISPLAY
+    #     '';
+    #   })
+      baobab
+      btrfs-progs
+      cava
+      cmatrix
+      cpufrequtils
+      curl
+      # distrobox
+      # dysk
+      eog
+      fastfetch
+      feh
+      gnome-system-monitor
+      gtk-engine-murrine
+      imagemagick
+      inxi
+      kdePackages.polkit-kde-agent-1
+      kdePackages.qt6ct
+      kdePackages.qtstyleplugin-kvantum
+      kdePackages.qtwayland
+      lazydocker
+      lazygit
+      libappindicator
+      libsForQt5.qt5ct
+      libsForQt5.qtstyleplugin-kvantum
+      mc
+      networkmanagerapplet
+      pciutils
+      power-profiles-daemon
+      serie
+    ];
+  in
+    communicationPackages ++ developmentPackages ++ desktopPackages ++ utilsPackages ++ hardwarePackages ++ internetPackages ++ virtualizationPackages ++ videoPackages ++ terminalsPackages ++ scripts ++ specialPackages;
+
+  # Environment variables
+  environment.variables = {
+    JAKOS_NIXOS_VERSION = "0.0.5";
+    JAKOS = "true";
+  };
+}

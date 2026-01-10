@@ -1,0 +1,11 @@
+# VS Code user/cache data
+Code/
+.vscode/
+
+# Wine prefix
+.wine/
+
+# Common junk
+*.log
+*.tmp
+.DS_Store
