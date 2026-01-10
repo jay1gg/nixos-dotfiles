@@ -16,10 +16,6 @@
     # OpenVPN
     openvpn # OpenVPN client
 
-    # PPTP VPN
-    pptpclient # PPTP client
-    pptp # PPTP protocol support
-
     # L2TP/IPSec
     xl2tpd # L2TP daemon
     libreswan # IPSec support (required for L2TP)
@@ -35,7 +31,6 @@
   boot.kernelModules = [
     "ppp_generic"
     "ppp_async"
-    "pptp"
     "l2tp_core"
     "l2tp_ppp"
     "xfrm4_tunnel"
