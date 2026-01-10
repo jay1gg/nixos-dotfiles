@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, username, ...}: {
   # Wine support for running Windows applications
   
   environment.systemPackages = with pkgs; [
@@ -9,17 +9,14 @@
     
     # Wine dependencies and utilities
     dxvk # DirectX 12 implementation for Wine
-    d3d12 # Direct3D 12 support
+    vkd3d # Direct3D 12 support
     
     # GUI utilities
     protontricks # Proton tricks for compatibility
   ];
-
-  # Enable 32-bit support for Wine compatibility
-  nixpkgs.config.allowUnfree = true;
   
   # Wine environment configuration
   environment.variables = {
-    WINE_DIR = "/home/jay/.wine";
+    WINE_DIR = "/home/${username}/.wine";
   };
 }
