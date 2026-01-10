@@ -14,6 +14,7 @@
   services.displayManager.ly = {
     enable = true;
     settings = {
+      hide_f1_commands = true;
       # Available animations: "doom", "colormix", "matrix"
       animation = "matrix";      # Falling characters Matrix-style animation
       bigclock = true;            # Display large clock on login screen

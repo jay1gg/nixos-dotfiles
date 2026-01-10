@@ -15,6 +15,19 @@ in {
     ./users.nix
     ./packages-fonts.nix
     ../../modules/amd-drivers.nix
+        # Development languages
+    ../../modules/php.nix # PHP with Laravel support
+    ../../modules/nodejs.nix # Node.js with npm/yarn/pnpm
+    ../../modules/python.nix # Python 3 development
+
+    # Development tools
+    ../../modules/databases.nix # Database clients (PostgreSQL, MySQL, MongoDB)
+
+    # Networking
+    ../../modules/vpn.nix # VPN clients (OpenVPN, PPTP, L2TP) with GUI
+
+    # Wine support
+    ../../modules/wine.nix # Wine for running Windows applications
   ];
 
   # BOOT related stuff
