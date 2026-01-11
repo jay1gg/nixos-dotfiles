@@ -156,7 +156,7 @@ printf "\n%.0s" {1..1}
 # Set the Nix configuration for experimental features
 NIX_CONFIG="experimental-features = nix-command flakes"
 #sudo nix flake update
-sudo nixos-rebuild switch --flake ~/nixos-dotfiles/#"${hostName}"
+sudo nixos-rebuild switch --flake ~/nixos-dotfiles/master/#"${hostName}"
 
 echo "-----"
 printf "\n%.0s" {1..2}
@@ -236,7 +236,7 @@ else
 fi
 
 #return to NixOS-Hyprland
-cd ~/nixos-dotfiles
+cd ~/nixos-dotfiles/master
 
 # copy fastfetch config if nixos.png is not present
 if [ ! -f "$HOME/.config/fastfetch/nixos.png" ]; then
