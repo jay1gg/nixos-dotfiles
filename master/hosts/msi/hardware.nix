@@ -13,24 +13,16 @@
 
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/1c9056bc-f384-4b62-a2fc-e2ce4a3c8a5f";
-      fsType = "xfs";
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/b04a3277-a859-43ca-9766-1bf35985c63e";
+    { device = "/dev/disk/by-uuid/8cc763cb-aa8a-41b7-9901-5dfc72a08e38";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/9A0E-92A8";
+    { device = "/dev/disk/by-uuid/3821-EF6E";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/5a3ac297-3dd3-459f-9efb-ddec0444f500"; }
-    ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
