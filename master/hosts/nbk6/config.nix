@@ -47,7 +47,7 @@ in {
     ];
 
     # This is for OBS Virtual Cam Support
-    kernelModules = [ "v4l2loopback" ];
+    kernelModules = [ "v4l2loopback" "iwlwifi" ];
     extraModprobeConfig = ''
       options v4l2loopback devices=1 video_nr=1 card_label="OBS Virtual Camera" exclusive_caps=1
     '';
@@ -253,7 +253,7 @@ in {
     enable = true;
     cpuFreqGovernor = "schedutil";
   };
-
+  hardware.enableRedistributableFirmware = true;
   #hardware.sane = {
   #  enable = true;
   #  extraBackends = [ pkgs.sane-airscan ];

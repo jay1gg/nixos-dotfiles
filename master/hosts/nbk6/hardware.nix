@@ -21,14 +21,12 @@
     device = "/dev/disk/by-uuid/33c2c6dc-1b25-42c9-af6b-fa4802aefe37";
     fsType = "ext4";
   };
-
+  
   fileSystems."/boot/efi" =
     { device = "/dev/disk/by-uuid/FED5-3F7A";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
-
-  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
