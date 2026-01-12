@@ -209,12 +209,16 @@
     # Custom scripts
     scripts = [
       (pkgs.writeShellScriptBin "update" ''
-        cd ~/nixos-dotfiles/master
-        nh os switch -u -H ${host} .
+          set -e
+          HOST="$(cat /etc/hostname)"
+          cd ~/nixos-dotfiles/master
+          nh os switch -u -H "$HOST" .
       '')
       (pkgs.writeShellScriptBin "rebuild" ''
-        cd ~/nixos-dotfiles/master
-        sudo nixos-rebuild switch --flake ~/nixos-dotfiles/master
+          set -e
+          HOST="$(cat /etc/hostname)"
+          cd ~/nixos-dotfiles/master
+          sudo nixos-rebuild switch --flake ".#$HOST"
       '')
       (pkgs.writeShellScriptBin "ncg" ''
         nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot

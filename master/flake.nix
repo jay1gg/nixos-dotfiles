@@ -1,23 +1,17 @@
 {
   description = "Jay's nixos-dotfiles";
-  inputs = {
-    # Core Nix packages
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-    nixpkgs.url = "nixpkgs/nixos-unstable";
 
-    # Home Manager for user configuration
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # # Nixvim for Neovim configuration
-    # nixvim.url = "github:nix-community/nixvim/nixos-25.11";
-
-    # Code formatter
     alejandra.url = "github:kamadorueda/alejandra";
 
-    # Desktop environment and utilities
     ags = {
       type = "github";
       owner = "aylur";
@@ -25,98 +19,94 @@
       ref = "v1";
     };
 
-    catppuccin = {
-      url = "github:catppuccin/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Commented out: Hyprland development version
-    # hyprland.url = "github:hyprwm/Hyprland";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
-    ags,
-    alejandra,
     nix-flatpak,
+    home-manager,
+    alejandra,
     ...
-  }: let
-    inherit (self) outputs;
-
-    # System configuration
+  }:
+  let
     system = "x86_64-linux";
-    host = "nbk6";
     username = "jay";
 
-    # Package sets
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-    };
-  in {
-    nixosConfigurations = {
-      "${host}" = nixpkgs.lib.nixosSystem rec {
+    # ---------------- Host factory ----------------
+    mkHost = { hostName, extraModules ? [ ] }:
+      nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit system inputs username host;
+          inherit system inputs username;
+          host = hostName;
         };
 
-        modules = [
-          ./hosts/${host}/config.nix
+        modules =
+          [
+            # Host-specific base config
+            ./hosts/${hostName}/config.nix
 
-          # Modules
-          ./modules/overlays.nix # Nixpkgs overlays (CMake policy fixes)
-          ./modules/quickshell.nix # Quickshell module
-          ./modules/packages.nix # Software packages
-          ./modules/fonts.nix # Fonts packages
-          ./modules/portals.nix # Portal configuration
-          ./modules/theme.nix # Set dark theme
-          ./modules/ly.nix # Ly display manager with matrix animation
-          ./modules/nh.nix # Nix helper
-          nix-flatpak.nixosModules.nix-flatpak
-          # External modules
-          inputs.catppuccin.nixosModules.catppuccin
+            # Shared modules
+            ./modules/overlays.nix
+            ./modules/quickshell.nix
+            ./modules/packages.nix
+            ./modules/fonts.nix
+            ./modules/portals.nix
+            ./modules/theme.nix
+            ./modules/ly.nix
+            ./modules/nh.nix
 
-          # Home Manager integration
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "hm-bak";
+            nix-flatpak.nixosModules.nix-flatpak
+            inputs.catppuccin.nixosModules.catppuccin
 
-              # Pass flake inputs to Home Manager
-              extraSpecialArgs = {
-                inherit inputs system username host;
-              };
+            # Home Manager
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "hm-bak";
 
-              users.${username} = {
-                home = {
-                  username = username;
-                  homeDirectory = "/home/${username}";
-                  stateVersion = "25.11";
+                extraSpecialArgs = {
+                  inherit inputs system username;
+                  host = hostName;
                 };
 
-                # Import Home Manager modules
-                imports = [
-                  ./modules/home/default.nix
-                ];
-              };
-            };
-          }
+                users.${username} = {
+                  home = {
+                    username = username;
+                    homeDirectory = "/home/${username}";
+                    stateVersion = "25.11";
+                  };
 
-          # Nixpkgs configuration
+                  imports = [
+                    ./modules/home/default.nix
+                  ];
+                };
+              };
+            }
+          ]
+          ++ extraModules;
+      };
+  in
+  {
+    nixosConfigurations = {
+      msi = mkHost {
+        hostName = "msi";
+        extraModules = [
           {
             nixpkgs.config = {
               allowUnfree = true;
-              allowBroken = true; # Temporary fix for broken CUDA in nixos-unstable
+              allowBroken = true;
               permittedInsecurePackages = [
                 "broadcom-sta-6.30.223.271-59-6.18.3"
               ];
@@ -124,9 +114,17 @@
           }
         ];
       };
+
+      nbk6 = mkHost {
+        hostName = "nbk6";
+        # no extra nixpkgs hacks here
+      };
+      vm = mkHost {
+        hostName = "vm";
+        # no extra nixpkgs hacks here
+      };
     };
 
-    # Code formatter
     formatter.${system} = alejandra.defaultPackage.${system};
   };
 }

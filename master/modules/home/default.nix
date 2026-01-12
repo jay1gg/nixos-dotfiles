@@ -21,13 +21,18 @@ let
     hypr = "hypr";            # Hyprland WM config
     swaync = "swaync";        # Notification daemon
     wlogout = "wlogout";      # Logout menu
-    foot = "foot";            # Terminal emulator
+    "gtk-3.0" = "gtk-3.0";  # GTK3 app themes
+    Thunar = "Thunar";        # File manager settings
+    xfce4 = "xfce4";        # Xfce4 settings (used by Thunar)
+    fastfetch = "fastfetch";  # System info tool
   };
 
   # Large binary files (icons, themes) from store directory
   storeFiles = {
     ".icons" = ".icons";      # Cursor and icon themes
     ".themes" = ".themes";    # GTK themes
+    ".zshrc" = ".zshrc";    # Zsh configuration
+
   };
 in
 {
