@@ -51,7 +51,7 @@
 
     # System configuration
     system = "x86_64-linux";
-    host = "msi";
+    host = "nbk6";
     username = "jay";
 
     # Package sets
