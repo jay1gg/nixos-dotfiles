@@ -195,7 +195,7 @@ in {
     openssh = {
       enable = true;
       settings = {
-        PermitEmptyPasswords = "yes";
+        PermitRootLogin = "yes";
       };
     };
 
