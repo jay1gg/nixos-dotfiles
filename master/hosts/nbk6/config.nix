@@ -190,7 +190,7 @@ in {
     libinput.enable = true;
 
     rpcbind.enable = true;
-    nfs.server.enable = true;
+    nfs.server.enable = false;
 
     openssh.enable = true;
 
