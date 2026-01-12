@@ -19,18 +19,11 @@ in {
     ../../modules/intel-drivers.nix
     ../../modules/vm-guest-services.nix
     ../../modules/local-hardware-clock.nix
-        # Development languages
     ../../modules/php.nix # PHP with Laravel support
     ../../modules/nodejs.nix # Node.js with npm/yarn/pnpm
     ../../modules/python.nix # Python 3 development
-
-    # Development tools
     ../../modules/databases.nix # Database clients (PostgreSQL, MySQL, MongoDB)
-
-    # Networking
     ../../modules/vpn.nix # VPN clients (OpenVPN, PPTP, L2TP) with GUI
-
-    # Wine support
     ../../modules/wine.nix # Wine for running Windows applications
   ];
 
@@ -90,11 +83,6 @@ in {
       configurationName = "${host}";
     };
 
-    # Bootloader GRUB theme, configure below
-
-    ## -end of BOOTLOADERS----- ##
-
-    # Make /tmp a tmpfs
     tmp = {
       useTmpfs = false;
       tmpfsSize = "30%";
@@ -102,13 +90,6 @@ in {
     
     plymouth.enable = true;
   };
-
-  # GRUB Bootloader theme. Of course you need to enable GRUB above.. duh! and also, enable it on flake.nix
-  #distro-grub-themes = {
-  #  enable = true;
-  #  theme = "nixos";
-  #};
-
   # Extra Module Options
   drivers = {
     amdgpu.enable = false;
@@ -202,35 +183,7 @@ in {
 
     gnome.gnome-keyring.enable = true;
 
-    #printing = {
-    #  enable = false;
-    #  drivers = [
-    # pkgs.hplipWithPlugin
-    #  ];
-    #};
-
-    #avahi = {
-    #  enable = true;
-    #  nssmdns4 = true;
-    #  openFirewall = true;
-    #};
-
-    #ipp-usb.enable = true;
-
-    #syncthing = {
-    #  enable = false;
-    #  user = "${username}";
-    #  dataDir = "/home/${username}";
-    #  configDir = "/home/${username}/.config/syncthing";
-    #};
   };
-
-  # systemd.services.flatpak-repo = {
-  #   path = [pkgs.flatpak];
-  #   script = ''
-  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  #   '';
-  # };
 
   environment.systemPackages = [ pkgs.flatpak ];
   services.flatpak = {
@@ -253,20 +206,13 @@ in {
     enable = true;
     cpuFreqGovernor = "schedutil";
   };
-  hardware.enableRedistributableFirmware = true;
-  #hardware.sane = {
-  #  enable = true;
-  #  extraBackends = [ pkgs.sane-airscan ];
-  #  disabledDefaultBackends = [ "escl" ];
-  #};
-
-  # Extra Logitech Support
-  # hardware = {
-  #   logitech.wireless.enable = false;
-  #   logitech.wireless.enableGraphical = false;
-  # };
-
+  # hardware.enableRedistributableFirmware = true;
   services.pulseaudio.enable = false; # stable branch
+
+   # Enable the Docker service
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless.enable = true;
+  virtualisation.docker.rootless.setSocketVariable = true;
 
   # Bluetooth
   hardware = {
@@ -327,14 +273,6 @@ in {
     };
   };
 
-  # Virtualization / Containers
-  virtualisation.libvirtd.enable = false;
-  virtualisation.podman = {
-    enable = false;
-    dockerCompat = false;
-    defaultNetwork.settings.dns_enabled = false;
-  };
-
   # OpenGL
   hardware.graphics = {
     enable = true;
@@ -344,20 +282,6 @@ in {
 
   # For Electron apps to use wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  # For Hyprland QT Support
   environment.sessionVariables.QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 }
