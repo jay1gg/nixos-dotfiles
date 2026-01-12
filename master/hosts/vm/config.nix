@@ -192,7 +192,12 @@ in {
     rpcbind.enable = true;
     nfs.server.enable = true;
 
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      settings = {
+        PermitEmptyPasswords = "yes";
+      };
+    };
 
     blueman.enable = true;
 
