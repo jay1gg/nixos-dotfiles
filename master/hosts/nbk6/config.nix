@@ -81,6 +81,7 @@ in {
       memtest86.enable = true;
       extraGrubInstallArgs = [ "--bootloader-id=${host}" ];
       configurationName = "${host}";
+      useOSProber = true;
     };
 
     tmp = {

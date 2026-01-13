@@ -21,7 +21,12 @@
     device = "/dev/disk/by-uuid/33c2c6dc-1b25-42c9-af6b-fa4802aefe37";
     fsType = "ext4";
   };
-  
+
+  fileSystems."/var/sdb1" = {
+    device = "/dev/disk/by-uuid/0ba52fa8-5140-4a34-b38b-a1e87e7bee4c";
+    fsType = "ext4";
+  };
+
   fileSystems."/boot/efi" =
     { device = "/dev/disk/by-uuid/FED5-3F7A";
       fsType = "vfat";
