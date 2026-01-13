@@ -31,8 +31,7 @@ let
   storeFiles = {
     ".icons" = ".icons";      # Cursor and icon themes
     ".themes" = ".themes";    # GTK themes
-    ".zshrc" = ".zshrc";    # Zsh configuration
-
+    ".zshrc" = ".zshrc";      # Zsh config (large file)
   };
 in
 {

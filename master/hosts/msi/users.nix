@@ -33,17 +33,22 @@ in {
   };
 
   environment.shells = with pkgs; [zsh];
-  environment.systemPackages = with pkgs; [lsd fzf git];
-  programs = {
-    zsh = {
+  environment.systemPackages = with pkgs; [lsd fzf git oh-my-zsh zsh-powerlevel10k meslo-lgs-nf];
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    enableBashCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+    histSize = 10000;
       ohMyZsh = {
         enable = true;
-        theme = "agnoster";
-        plugins = ["git"];
+        plugins = [
+          "git"
+          "sudo"
+          "fzf"
+        ];
+        theme = "bira";
       };
-      # Enable zsh plugins via NixOS module options
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
-    };
   };
 }
