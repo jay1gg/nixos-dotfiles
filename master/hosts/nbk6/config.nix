@@ -210,6 +210,8 @@ in {
   hardware.enableRedistributableFirmware = true;
   services.pulseaudio.enable = false; # stable branch
 
+  # Enable Virtualisation
+  virtualisation.libvirtd.enable = true;
    # Enable the Docker service
   virtualisation.docker.enable = true;
   virtualisation.docker.rootless.enable = true;
