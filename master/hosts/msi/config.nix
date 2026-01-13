@@ -255,13 +255,12 @@ in {
     };
   };
 
-  # # Virtualization / Containers
+  # Enable Virtualisation
   virtualisation.libvirtd.enable = true;
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = false;
-  };
+   # Enable the Docker service
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless.enable = true;
+  virtualisation.docker.rootless.setSocketVariable = true;
 
   # OpenGL
   hardware.graphics = {
