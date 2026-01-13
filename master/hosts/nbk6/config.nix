@@ -207,7 +207,7 @@ in {
     enable = true;
     cpuFreqGovernor = "schedutil";
   };
-  # hardware.enableRedistributableFirmware = true;
+  hardware.enableRedistributableFirmware = true;
   services.pulseaudio.enable = false; # stable branch
 
    # Enable the Docker service

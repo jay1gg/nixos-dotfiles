@@ -126,6 +126,7 @@
 
     # Utilities
     utilsPackages = with pkgs; [
+      anydesk
       ffmpeg
       figlet
       file-roller

@@ -33,10 +33,8 @@
 "modules-center": [
 	"group/app_drawer",
 	"custom/separator#blank",
-	"group/notify",
 	"custom/separator#dot-line",
 	"hyprland/workspaces#rw",
-	"clock",
 	// "custom/separator#dot-line",
 	// "custom/weather",
 	"custom/separator#dot-line",	
@@ -46,14 +44,17 @@
 
 "modules-right": [
 	"tray",
-	"network#speed",
+	// "network#speed",
 	"custom/separator#dot-line",
-	"group/mobo_drawer",
-	"custom/separator#line",  
+	// "group/mobo_drawer",
+	// "custom/separator#line",  
 	"group/audio",
+	"group/laptop",
 	"custom/separator#dot-line", 
 	// "custom/nightlight",
 	// "custom/separator#dot-line", 
+	"clock",
+	"custom/separator#dot-line",
 	"group/status",
 	],
 }
